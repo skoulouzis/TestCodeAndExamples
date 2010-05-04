@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/swingx/rome-0.8.jar"/>
+	<classpathentry kind="lib" path="lib/swingx/swing-worker.jar"/>
+	<classpathentry kind="lib" path="lib/swingx/swingx-bean.jar"/>
+	<classpathentry kind="lib" path="lib/swingx/swingx-ws-2009_06_14.jar"/>
+	<classpathentry kind="lib" path="lib/swingx/swingx.jar"/>
+	<classpathentry kind="lib" path="lib/jfreeChart/jcommon-1.0.16.jar"/>
+	<classpathentry kind="lib" path="lib/jfreeChart/jfreechart-1.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/jfreeChart/swtgraphics2d.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/axis/axis-ant.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/axis/axis.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/axis/commons-discovery.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/axis/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/axis/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/axis/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/axis/saaj.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/axis/wsdl4j.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/cli/commons-cli-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/freefluo/freefluo.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/javax/activation.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/jdom/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/xalan/xalan.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/xerces/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/freefluo/xerces/xmlParserAPIs.jar"/>
+	<classpathentry kind="lib" path="lib/java3dlib/ext/j3dcore.jar"/>
+	<classpathentry kind="lib" path="lib/java3dlib/ext/j3dutils.jar"/>
+	<classpathentry kind="lib" path="lib/java3dlib/ext/vecmath.jar"/>
+	<classpathentry kind="lib" path="lib/java3dlib/i386/libj3dcore-ogl-cg.so"/>
+	<classpathentry kind="lib" path="lib/java3dlib/i386/libj3dcore-ogl.so"/>
+	<classpathentry kind="lib" path="lib/pdf/iText-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/pdf/PDFBox-0.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/pdf/PDFRenderer.jar"/>
+	<classpathentry kind="lib" path="lib/pdf/PDFTextStream-2.2-NOCJK.jar"/>
+	<classpathentry kind="lib" path="lib/pdf/PDFTextStream-2.2.jar"/>
+	<classpathentry kind="lib" path="lib/vtk/vtk.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/javax.servlet.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/nl.uva.vlet.vrs.core"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
