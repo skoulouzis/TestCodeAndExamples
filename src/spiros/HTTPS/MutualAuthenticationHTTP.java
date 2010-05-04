@@ -21,10 +21,17 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLParameters;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509KeyManager;
+
+import com.sun.net.ssl.internal.ssl.DefaultSSLContextImpl;
+import com.sun.net.ssl.internal.ssl.SSLContextImpl;
+import com.sun.net.ssl.internal.ssl.SSLSocketImpl;
+
+import sun.net.www.protocol.https.HttpsURLConnectionImpl;
 
 /**
  * @author theSecurityDuke http://javasecurity.wikidot.com/example-item-1
@@ -32,9 +39,11 @@ import javax.net.ssl.X509KeyManager;
 public class MutualAuthenticationHTTP
 {
     private static final boolean debug = true;
+    private static  SSLContext context;
 
     public static void main(String[] args)
     {
+        
         String url = "https://wmslb2.grid.sara.nl:9000/";
         // String keyStoreFileName = "Y:\\deleteme\\key.jks";
         String keyStoreFileName = "/home/skoulouz/.vletrc/cacerts";
@@ -63,26 +72,73 @@ public class MutualAuthenticationHTTP
     private static void doitAll(String urlString, SSLSocketFactory sslSocketFactory) throws IOException
     {
         URL url = new URL(urlString);
-        URLConnection connection = url.openConnection();
-        if (connection instanceof HttpsURLConnection)
-        {
-            ((HttpsURLConnection) connection).setSSLSocketFactory(sslSocketFactory);
+//        HttpsURLConnectionImpl connection = (HttpsURLConnectionImpl) url.openConnection();
+        
+//        connection.setSSLSocketFactory(sslSocketFactory);
+        
+        Socket socket = sslSocketFactory.createSocket(url.getHost(), url.getPort());
+        
+        SSLSocketImpl sslScok = (SSLSocketImpl) socket;
+        
+        String[] cipherSuits = sslScok.getEnabledCipherSuites();
+        String[] protocols = sslScok.getEnabledProtocols();
+        boolean enableSessionCreation = sslScok.getEnableSessionCreation();
+        String hostnameVer = sslScok.getHostnameVerification();
+        boolean needClienAuth = sslScok.getNeedClientAuth();
+        SSLParameters sslParams = sslScok.getSSLParameters();
+        String[] supportedCipher = sslScok.getSupportedCipherSuites();
+        String[] supporteedPriotocols = sslScok.getSupportedProtocols();
+        boolean wantClientyAuth = sslScok.getWantClientAuth();
+        
+        for(int i=0;i<cipherSuits.length;i++){
+//            System.err.println("cipherSuits: "+    cipherSuits[i]);
         }
         
-        connection.getContent();
+        for(int i=0;i<protocols.length;i++){
+//            System.err.println("protocols: "+    protocols[i]);
+        }
         
-//        int x;
-//        while ((x = ((InputStream) connection.getContent()).read()) != -1)
-//        {
-//            System.out.print(new String(new byte[] { (byte) x }));
-//        }
+        System.err.println("enableSessionCreation: "+    enableSessionCreation);
+        System.err.println("hostnameVer: "+    hostnameVer);
+        System.err.println("needClienAuth: "+    needClienAuth);
+        
+        System.err.println("sslParams.needClienAuth: "+    sslParams.getNeedClientAuth());
+        
+        System.err.println("sslParams.getWantClientAuth: "+    sslParams.getWantClientAuth());
+        
+        for(int i=0;i<supportedCipher.length;i++){
+//            System.err.println("supportedCipher: "+    supportedCipher[i]);
+        }
+        
+        for(int i=0;i<supporteedPriotocols.length;i++){
+//            System.err.println("supporteedPriotocols: "+    supporteedPriotocols[i]);
+        }
+        
+        System.err.println("wantClientyAuth: "+    wantClientyAuth);
+        
+        
+        sslScok.setNeedClientAuth(true);
+        sslScok.setWantClientAuth(true);
+//        sslParams.setNeedClientAuth(true);
+//        sslScok.setSSLParameters(sslParams);
+        needClienAuth = sslScok.getNeedClientAuth();
+        wantClientyAuth = sslScok.getWantClientAuth();
+        sslParams = sslScok.getSSLParameters();
+        
+        System.err.println("-- needClienAuth: "+    needClienAuth);
+        System.err.println("-- wantClientyAuth: "+    wantClientyAuth);
+        System.err.println("--sslParams.needClienAuth: "+    sslParams.getNeedClientAuth());
+        
+        
+        sslScok.getInputStream().read();
+        
     }
 
     private static SSLSocketFactory initItAll(KeyManager[] keyManagers, TrustManager[] trustManagers)
             throws NoSuchAlgorithmException, KeyManagementException
-    {
-//        SSLContext context = SSLContext.getInstance("SSLv3");
-        SSLContext context = SSLContext.getInstance("TLS");
+    {        
+        SSLContext context = SSLContext.getInstance("SSLv3");
+//        context = SSLContext.getInstance("TLS");
         // TODO investigate: could also be
         // "SSLContext context = SSLContext.getInstance("TLS");" Why?
         context.init(keyManagers, trustManagers, null);
