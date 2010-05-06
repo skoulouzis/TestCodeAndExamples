@@ -41,5 +41,6 @@
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/javax.servlet.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/nl.uva.vlet.vrs.core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.globus.wsclient-4.1.0"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -32,11 +32,11 @@ public class TestSSL
 
         try
         {
-             test.doIt();
+            // test.doIt();
 
-            // test.doIt2();
+            test.doIt2();
 
-//            test.rawSocket();
+            // test.rawSocket();
         }
         catch (Exception e)
         {
@@ -48,8 +48,7 @@ public class TestSSL
     private void rawSocket() throws UnknownHostException, IOException
     {
         SocketFactory factory = SSLSocketFactory.getDefault();
-        
-        
+
         // Get Socket from factory
         Socket socket = factory.createSocket(HOST_NAME, 9000);
 
@@ -84,8 +83,8 @@ public class TestSSL
     {
         String scheme = "https";
         String keystorePassword = null;
-        URL truststoreUrl = null;
-        URL keystoreUrl = null;
+        String truststoreUrl = "/home/skoulouz/.globus/usercert.p12";
+        String keystoreUrl = ("/home/skoulouz/.vletrc/cacerts");
         String truststorePassword = null;
         ProtocolSocketFactory factory = new AuthSSLProtocolSocketFactory(keystoreUrl, keystorePassword, truststoreUrl,
                 truststorePassword);

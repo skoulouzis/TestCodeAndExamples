@@ -204,11 +204,11 @@ public class AuthSSLProtocolSocketFactory implements SecureProtocolSocketFactory
     /** Log object for this class. */
     private static final Log LOG = LogFactory.getLog(AuthSSLProtocolSocketFactory.class);
 
-    private URL keystoreUrl = null;
+    private String keystoreUrl = null;
 
     private String keystorePassword = null;
 
-    private URL truststoreUrl = null;
+    private String truststoreUrl = null;
 
     private String truststorePassword = null;
 
@@ -219,33 +219,33 @@ public class AuthSSLProtocolSocketFactory implements SecureProtocolSocketFactory
      * truststore file must be given. Otherwise SSL context initialization error
      * will result.
      * 
-     * @param keystoreUrl
+     * @param keystoreUrl2
      *            URL of the keystore file. May be <tt>null</tt> if HTTPS client
      *            authentication is not to be used.
      * @param keystorePassword
      *            Password to unlock the keystore. IMPORTANT: this
      *            implementation assumes that the same password is used to
      *            protect the key and the keystore itself.
-     * @param truststoreUrl
+     * @param truststoreUrl2
      *            URL of the truststore file. May be <tt>null</tt> if HTTPS
      *            server authentication is not to be used.
      * @param truststorePassword
      *            Password to unlock the truststore.
      */
-    public AuthSSLProtocolSocketFactory(final URL keystoreUrl, final String keystorePassword, final URL truststoreUrl,
-            final String truststorePassword)
+    public AuthSSLProtocolSocketFactory(final String keystoreUrl2, final String keystorePassword,
+            final String truststoreUrl2, final String truststorePassword)
     {
         super();
-        this.keystoreUrl = keystoreUrl;
+        this.keystoreUrl = keystoreUrl2;
         this.keystorePassword = keystorePassword;
-        this.truststoreUrl = truststoreUrl;
+        this.truststoreUrl = truststoreUrl2;
         this.truststorePassword = truststorePassword;
     }
 
-    private static KeyStore createKeyStore(final URL url, final String password) throws KeyStoreException,
+    private static KeyStore createKeyStore(final String keystoreUrl2, final String password) throws KeyStoreException,
             NoSuchAlgorithmException, CertificateException, IOException
     {
-        if (url == null)
+        if (keystoreUrl2 == null)
         {
             throw new IllegalArgumentException("Keystore url may not be null");
         }
@@ -254,7 +254,7 @@ public class AuthSSLProtocolSocketFactory implements SecureProtocolSocketFactory
         InputStream is = null;
         try
         {
-            is = url.openStream();
+            is = new java.io.FileInputStream(keystoreUrl2);
             keystore.load(is, password != null ? password.toCharArray() : null);
         }
         finally

@@ -2,10 +2,8 @@ package spiros.HTTPS;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
 import java.net.URL;
-import java.net.URLConnection;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -17,7 +15,6 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -27,11 +24,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509KeyManager;
 
-import com.sun.net.ssl.internal.ssl.DefaultSSLContextImpl;
-import com.sun.net.ssl.internal.ssl.SSLContextImpl;
 import com.sun.net.ssl.internal.ssl.SSLSocketImpl;
-
-import sun.net.www.protocol.https.HttpsURLConnectionImpl;
 
 /**
  * @author theSecurityDuke http://javasecurity.wikidot.com/example-item-1
@@ -39,7 +32,7 @@ import sun.net.www.protocol.https.HttpsURLConnectionImpl;
 public class MutualAuthenticationHTTP
 {
     private static final boolean debug = true;
-    private static  SSLContext context;
+    
 
     public static void main(String[] args)
     {
@@ -79,6 +72,7 @@ public class MutualAuthenticationHTTP
         Socket socket = sslSocketFactory.createSocket(url.getHost(), url.getPort());
         
         SSLSocketImpl sslScok = (SSLSocketImpl) socket;
+        
         
         String[] cipherSuits = sslScok.getEnabledCipherSuites();
         String[] protocols = sslScok.getEnabledProtocols();
@@ -130,7 +124,7 @@ public class MutualAuthenticationHTTP
         System.err.println("--sslParams.needClienAuth: "+    sslParams.getNeedClientAuth());
         
         
-        sslScok.getInputStream().read();
+        sslScok.startHandshake();
         
     }
 
