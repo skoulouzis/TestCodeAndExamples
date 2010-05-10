@@ -3,6 +3,7 @@ package spiros.HTTPS.globus;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -18,8 +19,12 @@ public class TestSSL
 
         try
         {
-            MYGSIHttpURLConnection conn = new MYGSIHttpURLConnection(new URL("https://wms.grid.sara.nl:9000/"));
+//            MYGSIHttpURLConnection conn = new MYGSIHttpURLConnection(new URL("https://wms.grid.sara.nl:9000/"));
 //            MYGSIHttpURLConnection conn = new MYGSIHttpURLConnection(new URL("https://elab.science.uva.nl:8443/"));
+            
+            org.apache.commons.httpclient.util.HttpURLConnection conn =  
+                new org.apache.commons.httpclient.util.HttpURLConnection(new org.apache.commons.httpclient.methods.GetMethod(),new URL("https://grasveld.nikhef.nl:9000/"));
+//            MYGSIHttpURLConnection conn = new MYGSIHttpURLConnection(new URL("https://grasveld.nikhef.nl:9000/"));
             conn.connect();
 
             // conn.getContent();

@@ -51,14 +51,16 @@ public class MYGSIHttpURLConnection extends GSIHttpURLConnection
                 String msg = HTTPProtocol.createGETHeader(url.getFile(), url.getHost() + ":" + port,
                         "Java-Globus-GASS-HTTP/1.1.0");
                 
-                System.err.println("Message is: "+msg);
+                
                 
                 StringBuffer head = new StringBuffer();
                 head.append("GET " + url.getPath() + " " + "HTTP/1.1" + "\r\n");
-                head.append("Host: " + url.getHost() + "\r\n");
+                head.append("Host: " + url.getHost()+":"+url.getPort() + "\r\n");
 //                head.append("Connection: close\r\n");
 //                head.append("User-Agent: " + user_agent + "\r\n");
-//                head.append("\r\n");
+                head.append("\r\n");
+                
+                System.err.println("Message is: "+head.toString());
                 
                 out.write(head.toString().getBytes());
                 out.flush();
