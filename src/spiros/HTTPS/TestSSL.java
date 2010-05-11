@@ -18,6 +18,8 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 
+import com.sun.net.ssl.internal.ssl.SSLContextImpl;
+
 public class TestSSL
 {
 
@@ -47,10 +49,16 @@ public class TestSSL
 
     private void rawSocket() throws UnknownHostException, IOException
     {
+        
+        
+        SSLContextImpl context = new SSLContextImpl();
+        
+        
         SocketFactory factory = SSLSocketFactory.getDefault();
-
+        
         // Get Socket from factory
         Socket socket = factory.createSocket(HOST_NAME, 9000);
+        
 
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 

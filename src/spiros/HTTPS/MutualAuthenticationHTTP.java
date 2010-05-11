@@ -179,6 +179,7 @@ public class MutualAuthenticationHTTP
             throws NoSuchAlgorithmException, KeyManagementException
     {
         SSLContext context = SSLContext.getInstance("SSLv3");
+//        SSLContext context = SSLContext.getDefault();
         // context = SSLContext.getInstance("TLS");
         // TODO investigate: could also be
         // "SSLContext context = SSLContext.getInstance("TLS");" Why?
