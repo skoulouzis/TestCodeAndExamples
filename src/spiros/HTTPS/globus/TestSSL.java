@@ -74,10 +74,11 @@ public class TestSSL
             System.err.println("ContentEncoding: " + conn.getContentEncoding());
 
             System.err.println("ContentLength: " + conn.getContentLength());
+            
+            
+            System.err.println("Content: " + conn.getContent().getClass().getName());
 
-            // conn.getContent();
-
-            // conn.disconnect();
+             
 
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine;
@@ -85,6 +86,8 @@ public class TestSSL
             while ((inputLine = in.readLine()) != null)
                 System.out.println(inputLine);
             in.close();
+            
+            
 
         }
         catch (MalformedURLException e)
