@@ -1,11 +1,17 @@
 package spiros.HTTPS.globus;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
+import java.net.URLConnection;
 
+import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.coyote.http11.HTTPSProtocol;
 import org.globus.common.ChainedIOException;
 import org.globus.gsi.GSIConstants;
 import org.globus.gsi.gssapi.GSSConstants;
@@ -19,6 +25,7 @@ import org.gridforum.jgss.ExtendedGSSContext;
 import org.gridforum.jgss.ExtendedGSSManager;
 import org.ietf.jgss.GSSException;
 import org.ietf.jgss.GSSManager;
+import org.ietf.jgss.GSSName;
 
 public class MYGSIHttpURLConnection extends GSIHttpURLConnection
 {
@@ -47,22 +54,13 @@ public class MYGSIHttpURLConnection extends GSIHttpURLConnection
             if (os == null)
             {
                 OutputStream out = socket.getOutputStream();
-                                
+
                 String msg = HTTPProtocol.createGETHeader(url.getFile(), url.getHost() + ":" + port,
                         "Java-Globus-GASS-HTTP/1.1.0");
-                
-                
-                
-                StringBuffer head = new StringBuffer();
-                head.append("GET " + url.getPath() + " " + "HTTP/1.1" + "\r\n");
-                head.append("Host: " + url.getHost()+":"+url.getPort() + "\r\n");
-//                head.append("Connection: close\r\n");
-//                head.append("User-Agent: " + user_agent + "\r\n");
-                head.append("\r\n");
-                
-                System.err.println("Message is: "+head.toString());
-                
-                out.write(head.toString().getBytes());
+
+                System.err.println("Message is: " + msg.toString());
+
+                out.write(msg.getBytes());
                 out.flush();
             }
             else
@@ -73,9 +71,9 @@ public class MYGSIHttpURLConnection extends GSIHttpURLConnection
             }
             InputStream in = socket.getInputStream();
             response = new HTTPResponseParser(in);
-            
-            System.err.println("response: "+response.getMessage()+" "+response.getStatusCode());
-            
+
+            System.err.println("response: " + response.getMessage() + " " + response.getStatusCode());
+
             if (!response.isOK())
                 throw new IOException(response.getMessage());
             if (response.isChunked())
@@ -89,17 +87,29 @@ public class MYGSIHttpURLConnection extends GSIHttpURLConnection
     @Override
     public synchronized void connect() throws IOException
     {
+        GSSName expectedName = null;
+        try
+        {
+            expectedName = getExpectedName();
+        }
+        catch (GSSException e1)
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        System.err.println("----------expectedName: " + expectedName);
+
         if (connected)
             return;
         connected = true;
         port = url.getPort() != -1 ? url.getPort() : 8443;
         GSSManager manager = ExtendedGSSManager.getInstance();
-                
+
         ExtendedGSSContext context = null;
         try
         {
-            context = (ExtendedGSSContext) manager.createContext(getExpectedName(), GSSConstants.MECH_OID, credentials,
-                    0);
+            context = (ExtendedGSSContext) manager.createContext(expectedName, GSSConstants.MECH_OID, credentials, 0);
             switch (delegationType)
             {
                 case 1: // '\001'
@@ -132,4 +142,5 @@ public class MYGSIHttpURLConnection extends GSIHttpURLConnection
         socket = factory.createSocket(url.getHost(), port, context);
         ((GssSocket) socket).setAuthorization(authorization);
     }
+
 }

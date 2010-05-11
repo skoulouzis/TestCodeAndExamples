@@ -34,9 +34,9 @@ public class TestSSL
         {
             // test.doIt();
 
-            test.doIt2();
+//            test.doIt2();
 
-            // test.rawSocket();
+             test.rawSocket();
         }
         catch (Exception e)
         {

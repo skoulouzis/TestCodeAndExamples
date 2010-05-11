@@ -3,34 +3,67 @@ package spiros.HTTPS.globus;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.globus.net.GSIHttpURLConnection;
-import org.globus.net.protocol.https.Handler;
+import org.globus.tomcat.coyote.net.HTTPSConnector;
 
 public class TestSSL
 {
+
+    private static URLConnection conn;
 
     public static void main(String[] args)
     {
 
         try
         {
-//            MYGSIHttpURLConnection conn = new MYGSIHttpURLConnection(new URL("https://wms.grid.sara.nl:9000/"));
-//            MYGSIHttpURLConnection conn = new MYGSIHttpURLConnection(new URL("https://elab.science.uva.nl:8443/"));
-            
-            org.apache.commons.httpclient.util.HttpURLConnection conn =  
-                new org.apache.commons.httpclient.util.HttpURLConnection(new org.apache.commons.httpclient.methods.GetMethod(),new URL("https://grasveld.nikhef.nl:9000/"));
-//            MYGSIHttpURLConnection conn = new MYGSIHttpURLConnection(new URL("https://grasveld.nikhef.nl:9000/"));
+             doit1();
+             
+             
+             doit2();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+  
+    private static void doit2()
+    {
+        HTTPSConnector c = new HTTPSConnector();
+        
+    }
+
+
+    private static void doit1()
+    {
+        try
+        {
+            // MYGSIHttpURLConnection conn = new MYGSIHttpURLConnection(new
+            // URL("https://wms.grid.sara.nl:9000/"));
+            // MYGSIHttpURLConnection conn = new MYGSIHttpURLConnection(new
+            // URL("https://elab.science.uva.nl:8443/"));
+
+            // conn = new org.apache.commons.httpclient.util.HttpURLConnection(
+            // new org.apache.commons.httpclient.methods.GetMethod(), new URL(
+            // "http://en.wikipedia.org/"));
+            conn = new MYGSIHttpURLConnection(new URL("https://grasveld.nikhef.nl:9000/"));
+
             conn.connect();
+
+            System.err.println("ContentType: " + conn.getContentType());
+
+            System.err.println("ContentEncoding: " + conn.getContentEncoding());
+
+            System.err.println("ContentLength: " + conn.getContentLength());
 
             // conn.getContent();
 
-//            conn.disconnect();
-
+            // conn.disconnect();
 
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine;
