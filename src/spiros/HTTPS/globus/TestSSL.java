@@ -43,7 +43,7 @@ public class TestSSL
             // "http://en.wikipedia.org/"));
             // conn = new MYGSIHttpURLConnection(new
             // URL("https://grasveld.nikhef.nl:9000/"));
-            conn = new GSIHttpURLConnection(new URL("https://wms.grid.sara.nl:9000/"));
+            conn = new GSIHttpURLConnection(new URL("https://dist.eugridpma.info:443/distribution/igtf/current/accredited/tgz/"));
 //            conn = new GSIHttpURLConnection(new URL("https://grasveld.nikhef.nl:9000/"));
             conn.setRequestProperty("gssMode", "ssl");
 
