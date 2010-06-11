@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.net.URL;
 import java.net.UnknownHostException;
 
 import javax.net.SocketFactory;
@@ -36,9 +35,9 @@ public class TestSSL
         {
             // test.doIt();
 
-//            test.doIt2();
+            // test.doIt2();
 
-             test.rawSocket();
+            test.rawSocket();
         }
         catch (Exception e)
         {
@@ -49,16 +48,13 @@ public class TestSSL
 
     private void rawSocket() throws UnknownHostException, IOException
     {
-        
-        
+
         SSLContextImpl context = new SSLContextImpl();
-        
-        
+
         SocketFactory factory = SSLSocketFactory.getDefault();
-        
+
         // Get Socket from factory
         Socket socket = factory.createSocket(HOST_NAME, 9000);
-        
 
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 

@@ -281,7 +281,7 @@ public class myParser extends BaseParser
                         pdfSource.unread(data, 0, amountRead);
                     }
                     boolean atEndOfFile = true;// we assume yes unless we find
-                                               // another.
+                    // another.
                     for (int i = 0; i < amountRead - 3 && atEndOfFile; i++)
                     {
                         atEndOfFile = !(data[i] == 'E' && data[i + 1] == 'O' && data[i + 2] == 'F');

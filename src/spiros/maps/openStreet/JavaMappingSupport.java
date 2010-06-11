@@ -81,14 +81,14 @@ public class JavaMappingSupport
         // openstreetmap.org tile server URL provided by Joshua Marinacci
         final int max = 17;
         TileFactoryInfo info = new TileFactoryInfo(0, max, max, 256, true, true, // tile
-                                                                                 // size
-                                                                                 // is
-                                                                                 // 256
-                                                                                 // and
-                                                                                 // x/y
-                                                                                 // orientation
-                                                                                 // is
-                                                                                 // normal
+                // size
+                // is
+                // 256
+                // and
+                // x/y
+                // orientation
+                // is
+                // normal
                 "http://tile.openstreetmap.org",// 5/15/10.png",
                 "x", "y", "z")
         {

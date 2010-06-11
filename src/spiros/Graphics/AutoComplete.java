@@ -1,14 +1,20 @@
 package spiros.Graphics;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
+import javax.swing.ComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-public class AutoComplete extends JComboBox //implements JComboBox.KeySelectionManager
+public class AutoComplete extends JComboBox // implements
+                                            // JComboBox.KeySelectionManager
 {
     /**
      * 
@@ -23,16 +29,17 @@ public class AutoComplete extends JComboBox //implements JComboBox.KeySelectionM
     {
         public void insertString(int offset, String str, AttributeSet a) throws BadLocationException
         {
-            System.err.println("insertString: "+offset+" "+str);
+            System.err.println("insertString: " + offset + " " + str);
             if (str == null)
                 return;
-            
+
             super.insertString(offset, str, a);
-            
-            if (!isPopupVisible() && str.length() != 0){
+
+            if (!isPopupVisible() && str.length() != 0)
+            {
                 fireActionEvent();
             }
-                
+
         }
     }
 
@@ -40,28 +47,26 @@ public class AutoComplete extends JComboBox //implements JComboBox.KeySelectionM
     {
         super(items);
         lap = new java.util.Date().getTime();
-        
-        System.err.println("---------------------Autoooo: "+items[0]);
-        
-        
-//        setKeySelectionManager(this);
+
+        System.err.println("---------------------Autoooo: " + items[0]);
+
+        // setKeySelectionManager(this);
         JTextField tf;
         if (getEditor() != null)
         {
             tf = (JTextField) getEditor().getEditorComponent();
             if (tf != null)
             {
-                
+
                 tf.setDocument(new CBDocument());
-                
+
                 addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent evt)
                     {
-                        
-                        
-                        System.err.println("actionPerformed: "+evt);
-                        
+
+                        System.err.println("actionPerformed: " + evt);
+
                         JTextField tf = (JTextField) getEditor().getEditorComponent();
                         String text = tf.getText();
                         ComboBoxModel aModel = getModel();
@@ -104,10 +109,10 @@ public class AutoComplete extends JComboBox //implements JComboBox.KeySelectionM
         for (int i = 0; i < aModel.getSize(); i++)
         {
             current = aModel.getElementAt(i).toString().toLowerCase();
-            
-            System.err.println("current: "+current);
-            System.err.println("searchFor: "+searchFor);
-            
+
+            System.err.println("current: " + current);
+            System.err.println("searchFor: " + searchFor);
+
             if (current.toLowerCase().startsWith(searchFor.toLowerCase()))
                 return i;
         }
@@ -129,7 +134,7 @@ public class AutoComplete extends JComboBox //implements JComboBox.KeySelectionM
         cp.setLayout(null);
         String[] names = { "Beate", "Claudia", "Fjodor", "Fred", "Friedrich", "Fritz", "Frodo", "Hermann", "Willi" };
         JComboBox cBox = new AutoComplete(names);
-        
+
         cBox.setBounds(50, 50, 100, 21);
         cBox.setEditable(true);
         cp.add(cBox);

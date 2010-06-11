@@ -72,11 +72,11 @@ public class MyProtocolSocketFactory implements ProtocolSocketFactory
             keyManagerFactory.init(keyStore, pKeyPassword.toCharArray());
 
             KeyManager[] managers = keyManagerFactory.getKeyManagers();
-            
+
             TrustManager[] trustmanagers = createTrustManagers(keyStore);
 
             sslcontext = SSLContext.getInstance("SSL");
-            
+
             sslcontext.init(managers, trustmanagers, new SecureRandom());
 
             return sslcontext;
@@ -96,7 +96,7 @@ public class MyProtocolSocketFactory implements ProtocolSocketFactory
         TrustManager[] trustmanagers = tmfactory.getTrustManagers();
         for (int i = 0; i < trustmanagers.length; i++)
         {
-//            debug("trustmanagers: " + trustmanagers[i].getClass().getName());
+            // debug("trustmanagers: " + trustmanagers[i].getClass().getName());
         }
         return trustmanagers;
     }

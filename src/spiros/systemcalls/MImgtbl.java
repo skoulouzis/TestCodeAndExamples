@@ -84,8 +84,8 @@ public class MImgtbl
 
             Runtime rt = Runtime.getRuntime();
             String cmd = montageHome + module; // + args[0] + " " + args[1] +
-                                               // " " + args[2] + " " + args[3]
-                                               // + " " + args[4];
+            // " " + args[2] + " " + args[3]
+            // + " " + args[4];
             System.out.println("cmd: " + cmd);
             p = rt.exec(cmd);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));

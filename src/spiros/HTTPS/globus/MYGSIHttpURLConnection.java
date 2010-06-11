@@ -1,17 +1,11 @@
 package spiros.HTTPS.globus;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
-import java.net.URLConnection;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.coyote.http11.HTTPSProtocol;
 import org.globus.common.ChainedIOException;
 import org.globus.gsi.GSIConstants;
 import org.globus.gsi.gssapi.GSSConstants;
@@ -57,7 +51,7 @@ public class MYGSIHttpURLConnection extends GSIHttpURLConnection
 
                 String msg = HTTPProtocol.createGETHeader(url.getFile(), url.getHost() + ":" + port,
                         "Java-Globus-GASS-HTTP/1.1.0");
-                
+
                 System.err.println("Message is: " + msg.toString());
 
                 out.write(msg.getBytes());
@@ -139,7 +133,7 @@ public class MYGSIHttpURLConnection extends GSIHttpURLConnection
         GssSocketFactory factory = GssSocketFactory.getDefault();
         socket = factory.createSocket(url.getHost(), port, context);
         ((GssSocket) socket).setAuthorization(authorization);
-        
+
         if (context.getMutualAuthState())
         {
             System.err.println("TCP @ " + socket.getLocalPort() + ": Mutual authentication took place!");
