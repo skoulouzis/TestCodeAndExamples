@@ -20,7 +20,9 @@ public class TestWebDav
     {
 
         HostConfiguration hostConfig = new HostConfiguration();
-        hostConfig.setHost("www.somehost.com");
+        
+        hostConfig.setHost("localhost", 8008);
+        
         HttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
         HttpConnectionManagerParams params = new HttpConnectionManagerParams();
         int maxHostConnections = 20;
@@ -32,9 +34,9 @@ public class TestWebDav
         client.setHostConfiguration(hostConfig);
 
         // source, dest, overwrite
-        DavMethod copy = new CopyMethod("http://www.somehost.com/duff/test3.txt",
-                "http://www.somehost.com/duff/test4.txt", true);
-
+        DavMethod copy = new CopyMethod("http://localhost:8008/vlet_devplan3.pdf",
+                "http://localhost:8008/vlet_devplan3.pdf.copy", true);
+        
         try
         {
             client.executeMethod(copy);
