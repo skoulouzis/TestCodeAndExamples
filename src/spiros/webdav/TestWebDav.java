@@ -16,26 +16,25 @@ import org.apache.jackrabbit.webdav.client.methods.DavMethod;
 
 public class TestWebDav
 {
-    public static void main(String args[]){
-        
-        
+    public static void main(String args[])
+    {
+
         HostConfiguration hostConfig = new HostConfiguration();
-        hostConfig.setHost("www.somehost.com"); 
+        hostConfig.setHost("www.somehost.com");
         HttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
         HttpConnectionManagerParams params = new HttpConnectionManagerParams();
         int maxHostConnections = 20;
         params.setMaxConnectionsPerHost(hostConfig, maxHostConnections);
-        connectionManager.setParams(params);    
+        connectionManager.setParams(params);
         HttpClient client = new HttpClient(connectionManager);
         Credentials creds = new UsernamePasswordCredentials("userId", "pw");
         client.getState().setCredentials(AuthScope.ANY, creds);
         client.setHostConfiguration(hostConfig);
-        
-        
-      //source, dest, overwrite
-        DavMethod copy=new CopyMethod("http://www.somehost.com/duff/test3.txt", "http://www.somehost.com/duff/test4.txt", true);
-        
-        
+
+        // source, dest, overwrite
+        DavMethod copy = new CopyMethod("http://www.somehost.com/duff/test3.txt",
+                "http://www.somehost.com/duff/test4.txt", true);
+
         try
         {
             client.executeMethod(copy);
@@ -50,8 +49,8 @@ public class TestWebDav
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
-        System.out.println(copy.getStatusCode() + " "+ copy.getStatusText());
-        
+
+        System.out.println(copy.getStatusCode() + " " + copy.getStatusText());
+
     }
 }
