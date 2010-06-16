@@ -39,20 +39,15 @@ public class TestWebDav
         
         try
         {
-            client.executeMethod(copy);
+//            client.executeMethod(copy);
         }
-        catch (HttpException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e)
+        catch (Exception e)
         {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        System.out.println(copy.getStatusCode() + " " + copy.getStatusText());
+//        System.out.println(copy.getStatusCode() + " " + copy.getStatusText());
 
     }
 }

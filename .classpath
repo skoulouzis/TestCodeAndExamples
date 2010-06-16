@@ -40,8 +40,8 @@
 	<classpathentry kind="lib" path="lib/commons-httpclient-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="lib/webdav/jackrabbit-webdav-2.1.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/nl.uva.vlet.vrs.core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.globus.wsclient-4.1.0"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/jackrabbit-webdav"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
