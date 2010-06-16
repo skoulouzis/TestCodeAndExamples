@@ -1,5 +1,9 @@
 package spiros.webdav;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
@@ -10,9 +14,15 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.OptionsMethod;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
+import org.apache.jackrabbit.webdav.DavConstants;
+import org.apache.jackrabbit.webdav.MultiStatus;
+import org.apache.jackrabbit.webdav.MultiStatusResponse;
 import org.apache.jackrabbit.webdav.client.methods.CopyMethod;
 import org.apache.jackrabbit.webdav.client.methods.DavMethod;
 import org.apache.jackrabbit.webdav.client.methods.PropFindMethod;
+import org.apache.jackrabbit.webdav.property.DavPropertySet;
+import org.apache.jackrabbit.webdav.property.DefaultDavProperty;
+import org.apache.jackrabbit.webdav.property.PropEntry;
 
 public class TestWebDav
 {
@@ -41,13 +51,45 @@ public class TestWebDav
 
         try
         {
-            PropFindMethod propFind = new PropFindMethod("http://localhost:8008/");
 
-            // client.executeMethod(copy);
+            // Read all properties of a resource
+            DavMethod pFind = new PropFindMethod("http://localhost:8008/HttpClient.java",
+                    DavConstants.PROPFIND_ALL_PROP, DavConstants.DEPTH_INFINITY);
+            client.executeMethod(pFind);
 
-            int status = client.executeMethod(propFind);
+            MultiStatus multiStatus = pFind.getResponseBodyAsMultiStatus();
 
-            System.out.println(propFind.getStatusCode() + " " + propFind.getStatusText());
+            // Not quite nice, but for a example ok
+            DavPropertySet props = multiStatus.getResponses()[0].getProperties(200);
+
+            Collection propertyColl = props.getContent();
+            propertyColl.iterator();
+            for (Iterator iterator = propertyColl.iterator(); iterator.hasNext();)
+            {
+                DefaultDavProperty tmpProp = (DefaultDavProperty) iterator.next();
+                System.out.println(tmpProp.getName() + "  " + tmpProp.getValue());
+            }
+
+            // Getting a list of subresources of a resource
+            pFind = new PropFindMethod("http://localhost:8008/", DavConstants.PROPFIND_ALL_PROP, DavConstants.DEPTH_1);
+            client.executeMethod(pFind);
+
+            multiStatus = pFind.getResponseBodyAsMultiStatus();
+            MultiStatusResponse[] responses = multiStatus.getResponses();
+            MultiStatusResponse currResponse;
+            ArrayList files = new ArrayList();
+            System.out.println("Folders and files in http://localhost:8008/ :");
+            for (int i = 0; i < responses.length; i++)
+            {
+                currResponse = responses[i];
+
+                System.out.println(currResponse.getHref());
+
+                // if (!(currResponse.getHref().equals(path) ||
+                // currResponse.getHref().equals(path + "/"))) {
+                // System.out.println(currResponse.getHref());
+                // }
+            }
 
         }
         catch (Exception e)
