@@ -17,9 +17,9 @@ public class TestWebDav
     {
         try
         {
-            // tetstGetOutputStreamApache();
+//             tetstGetOutputStreamApache();
 
-//             tetstGetOutputStreamWebDav4j();
+             tetstGetOutputStreamWebDav4j();
 
 //             testList();
 
