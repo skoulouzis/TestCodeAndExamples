@@ -48,6 +48,7 @@
 	<classpathentry kind="lib" path="lib/webdavclient4j/webdavclient4j-core-0.92.jar"/>
 	<classpathentry kind="lib" path="lib/webdavclient4j/webdavclient4j-jca-0.92.jar"/>
 	<classpathentry kind="lib" path="lib/webdavclient4j/commons-vfs-1.1-patched-hc301-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/GroboUtils-5-core.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/nl.uva.vlet.vrs.core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.globus.wsclient-4.1.0"/>
 	<classpathentry kind="output" path="bin"/>
